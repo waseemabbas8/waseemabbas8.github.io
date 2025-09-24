@@ -256,7 +256,7 @@
                             </div>
                         </div>
                         <div class="slide scrolla-element-anim-1 scroll-animate" data-animate="active">
-                            <img decoding="async" src="assets/images/profile2.png" alt="&lt;b&gt;Zoé&lt;/b&gt; Miller">
+                            <img decoding="async" src="assets/images/waseemabbas.png" alt="&lt;b&gt;Zoé&lt;/b&gt; Miller">
                             <span class="circle circle-1"></span>
                             <span class="circle img-1" style="background-image: url(assets/images/pat-1.png);"></span>
                             <span class="circle img-2" style="background-image: url(assets/images/pat-2.png);"></span>
@@ -264,13 +264,13 @@
                             <div class="info-list">
                                 <ul>
                                     <li>
-    									<span class="num">6 <strong>+</strong>
+    									<span class="num">7 <strong>+</strong>
     									</span>
                                         <span class="value">Years of <strong>Experience</strong>
     									</span>
                                     </li>
                                     <li>
-                                        <span class="num">30</span>
+                                        <span class="num">35</span>
                                         <span class="value">Completed <strong>Projects</strong>
     									</span>
                                     </li>
@@ -1549,7 +1549,7 @@
                             <div class="contacts-form scrolla-element-anim-1 scroll-animate" data-animate="active">
                                 <div class="bg-img" style="background-image: url(assets/images/pat-1.png);"></div>
                                 <div class="contacts-form">
-                                    <form id="cform" method="post">
+                                    <form id="cform" action="https://formspree.io/f/xeolbpnr" method="POST">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="group">
@@ -1585,9 +1585,9 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-right">
                                                 <div class="terms-label">* Accept the terms and conditions.</div>
-                                                <a href="#" class="btn" onclick="$('#cform').submit(); return false;">
-                                                    <span>Send Message</span>
-                                                </a>
+                          <button type="submit" class="btn">
+                            <span>Send Message</span>
+                          </button>
                                             </div>
                                         </div>
                                     </form>
@@ -1677,7 +1677,46 @@
 <script src="assets/js/skrollr.js"></script>
 <script src="assets/js/jquery.cookie.js"></script>
 <script src="assets/js/typed.js"></script>
-<script src="assets/js/common.js"></script>
+  <script src="assets/js/common.js"></script>
+
+  <!-- Contact Form Handler -->
+  <script>
+    document.getElementById('cform').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const submitButton = this.querySelector('button[type="submit"]');
+      const successMessage = document.querySelector('.alert-success');
+      
+      // Show loading state
+      submitButton.innerHTML = '<span>Sending...</span>';
+      submitButton.disabled = true;
+      
+      fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          successMessage.style.display = 'block';
+          this.reset();
+          submitButton.innerHTML = '<span>Send Message</span>';
+        } else {
+          throw new Error('Form submission failed');
+        }
+      })
+      .catch(error => {
+        alert('Sorry, there was an error sending your message. Please try again or contact me directly at ayeshaaslam9576@gmail.com');
+        submitButton.innerHTML = '<span>Send Message</span>';
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+      });
+    });
+  </script>
 
 </body>
 
